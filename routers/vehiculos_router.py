@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Query, Path #Query y Path para validaciones.
-from config.DataBase import lista_autos, lista_motos
+from starlette import status
+
+from config.DataBase_logic import lista_autos, lista_motos
 from models.Moto import Moto
 from models.Vehiculo import Vehiculo
 from fastapi import APIRouter, Query, Path
@@ -20,7 +22,7 @@ def get_Motos():
 
 
 # Crear Motos
-@router.post("/vehiculos/motos/crear", response_model=Moto)
+@router.post("/vehiculos/motos/crear", response_model=Moto, status_code=status.HTTP_201_CREATED)
 def create_Moto(moto: Moto):
     lista_motos.append(moto)
     return moto
